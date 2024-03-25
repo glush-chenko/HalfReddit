@@ -1,0 +1,72 @@
+.cardContainer {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    border-bottom: 1px solid #80808057;
+    gap: 1rem;
+    transition: background-color 0.3s;
+}
+
+.cardContainer:hover {
+    background-color: rgb(36 47 71);
+}
+
+.cardUpvotes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 1rem;
+}
+
+.cardUpvotes button:hover {
+    color: rgb(46 149 92);;
+}
+
+.cardInfo {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dataCard {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.dataCard h3 {
+    color: white;
+}
+
+.dataCard img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 1rem;
+}
+
+/*.dataCard p {*/
+/*    color: white;*/
+/*}*/
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+
+    gap: 0.5rem
+}
+
+.cardFooter img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.cardFooter p {
+    color: rgba(255, 255, 255, 0.61);
+    font-size: 0.8rem;
+}

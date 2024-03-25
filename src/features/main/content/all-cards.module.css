@@ -1,0 +1,10 @@
+.allCards {
+    display: flex;
+    /*row*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.allCards ul {
+    list-style-type: none;
+}

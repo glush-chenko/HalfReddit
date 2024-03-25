@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+
+    box-shadow: 0 13px 18px -6px rgba(255, 255, 255, 0.23);
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.logo {
+    max-width: 2rem;
+}
+
+.headerLogo {
+    gap: 0.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.headerLogo p {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.headerSearch {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+
+    align-items: center;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}

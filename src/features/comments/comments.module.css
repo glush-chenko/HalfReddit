@@ -1,0 +1,20 @@
+.commentsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(47, 63, 97);
+    border-radius: 2rem;
+    width: 4rem;
+    height: 2rem;
+    transition: background-color 0.3s;
+    gap: 6px;
+}
+
+.commentsContainer p {
+    color: white;
+}
+
+.commentsContainer:hover {
+    background-color: rgb(58 75 111);
+}
