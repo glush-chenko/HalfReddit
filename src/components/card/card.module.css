@@ -21,7 +21,7 @@
 }
 
 .cardUpvotes button:hover {
-    color: rgb(46 149 92);;
+    color: rgb(46 149 92);
 }
 
 .cardInfo {
@@ -68,5 +68,5 @@
 
 .cardFooter p {
     color: rgba(255, 255, 255, 0.61);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }

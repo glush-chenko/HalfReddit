@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from "../button/button";
+import {Button} from "../../generic/button/button";
 import styles from "./upvotes.module.css";
 
 interface UpvotesProps {
