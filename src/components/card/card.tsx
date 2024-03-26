@@ -1,9 +1,10 @@
 import React from 'react';
-import {Upvotes} from "../generic/upvotes/upvotes";
+import {Upvotes} from "./upvotes/upvotes";
 import {getTimeDifference} from "../../utils/date-utils";
 import styles from "./card.module.css";
-import {Comments} from "../../features/comments/comments";
-import {ImageUtils} from "../../utils/image-utils";
+import {Image} from "../generic/image/image";
+import defaultImage  from "../../assets/defaultProfileReddit.png";
+import {CommentsCounter} from "./comments-counter/comments-counter";
 
 interface CardProps {
     authorImg: string,
@@ -20,7 +21,7 @@ interface CardProps {
 export const Card = (props: CardProps) => {
     const {
         id, author, urlImg, title,
-        createdDate, authorImg, permalinkComments, ups, numComments
+        createdDate, authorImg, ups, numComments
     } = props;
 
     return (
@@ -31,13 +32,13 @@ export const Card = (props: CardProps) => {
             <div className={styles.cardInfo}>
                 <div className={styles.dataCard}>
                     <h3>{title}</h3>
-                    {urlImg && <img src={urlImg} alt="image-content"/>}
+                    {urlImg && <img src={urlImg} alt="post"/>}
                 </div>
                 <div className={styles.cardFooter}>
-                    {authorImg && <ImageUtils img={authorImg} author={author}/>}
+                    {authorImg && <Image img={authorImg} defaultImage={defaultImage}/>}
                     <p>{author}</p>
                     <p>{getTimeDifference(createdDate)}</p>
-                    <Comments commentsUrl={permalinkComments} numComments={numComments}/>
+                    <CommentsCounter numComments={numComments}/>
                 </div>
             </div>
         </div>

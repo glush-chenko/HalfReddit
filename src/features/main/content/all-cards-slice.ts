@@ -5,8 +5,7 @@ import {RootState} from "../../../app/store";
 interface ICardsSliceInitialState {
     cards: ICard[],
     isLoadingCards: boolean,
-    failedToLoadCards: boolean,
-    createCardsIsPending: boolean
+    failedToLoadCards: boolean
 }
 
 export const loadPopularCardsData = createAsyncThunk(
@@ -28,8 +27,7 @@ export const loadProfileImg = createAsyncThunk(
 const initialState= {
     cards: [],
     isLoadingCards: false,
-    failedToLoadCards: false,
-    createCardsIsPending: false
+    failedToLoadCards: false
 } satisfies ICardsSliceInitialState as ICardsSliceInitialState
 
 export const cardsSlice = createSlice({
