@@ -1,10 +1,19 @@
 .subredditContainer {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+
+    /*background-color: rgb(47, 63, 97);*/
+    /*transition: background-color 0.3s;*/
 }
 
 .imgSub {
     display: flex;
+}
+
+.imgSub img {
+    height: 2rem;
+    width: 2rem;
 }
 
 .subreddit {
@@ -14,5 +23,14 @@
 
 .subreddit p {
     margin: 0;
-    color: rgba(255, 255, 255, 0.61);
+}
+
+.subredditName {
+    font-size: 0.9em;
+    color: rgb(255 255 255 / 78%);
+}
+
+.subredditMembers {
+    font-size: 0.8em;
+    color: rgb(255 255 255 / 49%);
 }

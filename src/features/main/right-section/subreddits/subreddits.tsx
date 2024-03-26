@@ -27,17 +27,20 @@ const fakeDataSubreddits: ISubreddit[] = [
 export const Subreddits = () => {
     return (
         <div className={styles.subredditsContainer}>
-            <ul>
-                {fakeDataSubreddits.map((subreddit) => (
-                    <li key={subreddit.id}>
-                        <Subreddit
-                            counterMembers={subreddit.counterMembers}
-                            imgSub={subreddit.imgSub}
-                            nameSub={subreddit.nameSub}
-                        />
-                    </li>
-                ))}
-            </ul>
+            <div className={styles.subreddit}>
+                <h2>Subreddits</h2>
+                <ul>
+                    {fakeDataSubreddits.map((subreddit) => (
+                        <li key={subreddit.id}>
+                            <Subreddit
+                                counterMembers={subreddit.counterMembers}
+                                imgSub={subreddit.imgSub}
+                                nameSub={subreddit.nameSub}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
