@@ -6,12 +6,15 @@ export const getTimeDifference = (targetDate: Date) => {
     const minutesPassed = Math.floor(timeDiff / (1000 * 60));
     const hoursPassed = Math.floor(timeDiff / (1000 * 60 * 60));
     const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const monthsPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 12));
 
     if (minutesPassed < 60) {
         return `${minutesPassed} min ago`
     } else if (hoursPassed < 24) {
         return `${hoursPassed} hr. ago`
-    } else {
+    } else if (daysPassed < 30) {
         return `${daysPassed} day ago`
+    } else {
+        return `${monthsPassed} mo ago`
     }
 }

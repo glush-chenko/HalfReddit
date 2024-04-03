@@ -1,9 +1,14 @@
 .header {
     display: flex;
 
-    box-shadow: 0 13px 18px -6px rgba(255, 255, 255, 0.23);
+    box-shadow: 0 13px 74px -6px rgba(255, 255, 255, 0.23);
     height: 4rem;
     padding: 0 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    background-color: #0f191c;
+    border-bottom: 1px solid #8080809c;
 }
 
 .logo {

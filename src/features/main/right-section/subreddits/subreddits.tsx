@@ -29,9 +29,9 @@ export const Subreddits = () => {
         <div className={styles.subredditsContainer}>
             <div className={styles.subreddit}>
                 <h2>Subreddits</h2>
-                <ul>
+                <ul role="tablist">
                     {fakeDataSubreddits.map((subreddit) => (
-                        <li key={subreddit.id}>
+                        <li key={subreddit.id} role="tab">
                             <Subreddit
                                 counterMembers={subreddit.counterMembers}
                                 imgSub={subreddit.imgSub}

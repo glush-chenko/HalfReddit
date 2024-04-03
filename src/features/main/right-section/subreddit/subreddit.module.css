@@ -3,12 +3,24 @@
     align-items: center;
     gap: 0.5rem;
 
-    /*background-color: rgb(47, 63, 97);*/
-    /*transition: background-color 0.3s;*/
+    transition: background-color 0.3s;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.subredditContainer:hover {
+    background-color: rgb(34, 50, 55);
+}
+
+.subredditContainer:active {
+    transition: none;
+    background-color: rgb(41 62 69);
 }
 
 .imgSub {
     display: flex;
+
+    cursor: pointer;
 }
 
 .imgSub img {
@@ -23,6 +35,10 @@
 
 .subreddit p {
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 
 .subredditName {

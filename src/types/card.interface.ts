@@ -6,6 +6,6 @@ export interface ICard {
     permalink: string,
     numComments: number,
     url: string,
-    createdDate: Date,
+    createdDate: number,
     ups: number
 }

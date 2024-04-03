@@ -1,5 +1,5 @@
 import React from 'react';
-import {HeaderSearch} from "./header-search";
+import {HeaderSearch} from "./header-search/header-search";
 import logoReddit from "../../assets/reddit-logo.png";
 import styles from "./header.module.css";
 

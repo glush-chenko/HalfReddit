@@ -49,7 +49,7 @@ export const cardsSlice = createSlice({
                     permalink: card.data.permalink,
                     url: card.data.url,
                     numComments: card.data.num_comments,
-                    createdDate: new Date(card.data.created * 1000),
+                    createdDate: card.data.created * 1000,
                     ups: Math.round(card.data.ups)
                 }));
             })
@@ -81,3 +81,4 @@ export const selectAllCards = (state: RootState) => state.cards.cards;
 export const isLoadingCards = (state: RootState) => state.cards.isLoadingCards;
 
 export default cardsSlice.reducer;
+

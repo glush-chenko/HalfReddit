@@ -1,13 +1,14 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import iconsSearchPng from "../../assets/icons-search.png";
-import iconClosePng from "../../assets/icons-close.png";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import iconsSearchPng from "../../../assets/icons-search.png";
+import iconClosePng from "../../../assets/icons-close.png";
 import {
     clearSearchTerm,
     selectSearchTerm,
     setSearchTerm,
 } from "./header-search-slice";
 import styles from "./header-search.module.css";
+import {IconButton} from "../../../components/generic/icon-button/icon-button";
 
 export const HeaderSearch = () => {
     const dispatch = useAppDispatch();
@@ -15,14 +16,15 @@ export const HeaderSearch = () => {
 
     const onSearchChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearchTerm(e.target.value));
-    }, []);
+    }, [dispatch]);
 
     const onSearchTermClearHandler = useCallback(() => {
         dispatch(clearSearchTerm());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={styles.searchContainer}>
+            <IconButton srcImage={iconsSearchPng} className={styles.iconsSearch}/>
             <input
                 className={styles.search}
                 type="text"
@@ -30,17 +32,8 @@ export const HeaderSearch = () => {
                 onChange={onSearchChangeHandler}
                 placeholder="Search Reddit"
             />
-            {/*<span className={styles.imageContainer}>*/}
-            {/*    <img alt="search-icon" src={iconsSearchPng}/>*/}
-            {/*</span>*/}
             {searchTerm.length > 0 && (
-                <button
-                    onClick={onSearchTermClearHandler}
-                    type="button"
-                    className={styles.searchClearButton}
-                >
-                    <img className={styles.closeIcon} src={iconClosePng} alt="search-clear-button"/>
-                </button>
+                <IconButton srcImage={iconClosePng} onClickHandle={onSearchTermClearHandler} className={styles.searchClear}/>
             )}
         </div>
     );

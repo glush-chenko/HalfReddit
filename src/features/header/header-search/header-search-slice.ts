@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from "../../app/store";
+import {RootState} from "../../../app/store";
 
 export const headerSearchSlice = createSlice({
     name: "search",
     initialState: "",
     reducers: {
-        setSearchTerm: (state, action) => (state = action.payload),
-        clearSearchTerm: (state) => (state = ""),
+        setSearchTerm: (_state, action) => (action.payload),
+        clearSearchTerm: (_state) => (""),
     },
 });
 

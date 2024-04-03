@@ -3,6 +3,9 @@
 /*  grid-template-columns: 1fr 2fr 1fr;*/
 /*  grid-gap: 16px;*/
 /*}*/
+*:focus-visible {
+  outline: 1px solid white;
+}
 
 body {
   margin: 0;

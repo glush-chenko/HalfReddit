@@ -1,0 +1,27 @@
+.iconButtonContainer {
+    display: flex;
+    align-items: center;
+}
+
+.iconButtonContainer .iconButton {
+    background-color: transparent;
+    border: none;
+    padding: 0.3rem;
+    border-radius: 1rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.iconButtonContainer .iconButton img {
+    max-height: 1.5rem;
+    max-width: 1.5rem;
+}
+
+.iconButtonContainer .iconButton:hover, .iconButtonContainer .iconButton:focus-within{
+    background-color: rgb(53 76 84);
+}
+
+.iconButtonContainer .iconButton:active {
+    transition: none;
+    background-color: rgb(68 95 104);
+}

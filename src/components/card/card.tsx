@@ -3,16 +3,17 @@ import {Upvotes} from "./upvotes/upvotes";
 import {getTimeDifference} from "../../utils/date-utils";
 import styles from "./card.module.css";
 import {Image} from "../generic/image/image";
-import defaultImage  from "../../assets/defaultProfileReddit.png";
+import defaultImage from "../../assets/defaultProfileReddit.png";
 import {CommentsCounter} from "./comments-counter/comments-counter";
+import {ImageWithBlurredBackground} from "../generic/image-background/image-background";
 
 interface CardProps {
-    authorImg: string,
+    authorImg?: string,
     id: string,
     title: string,
     author: string,
     urlImg: string,
-    createdDate: Date,
+    createdDate: number,
     permalinkComments: string,
     numComments: number,
     ups: number
@@ -32,12 +33,12 @@ export const Card = (props: CardProps) => {
             <div className={styles.cardInfo}>
                 <div className={styles.dataCard}>
                     <h3>{title}</h3>
-                    {urlImg && <img src={urlImg} alt="post"/>}
+                    <ImageWithBlurredBackground alt="image" src={urlImg}/>
                 </div>
                 <div className={styles.cardFooter}>
                     {authorImg && <Image img={authorImg} defaultImage={defaultImage}/>}
                     <p>{author}</p>
-                    <p>{getTimeDifference(createdDate)}</p>
+                    <p>{getTimeDifference(new Date(createdDate))}</p>
                     <CommentsCounter numComments={numComments}/>
                 </div>
             </div>
