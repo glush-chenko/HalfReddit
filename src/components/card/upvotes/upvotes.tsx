@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from "../../generic/button/button";
 import styles from "./upvotes.module.css";
 import {formatNumber} from "../../../utils/format-number-utils";
 import {IconButton} from "../../generic/icon-button/icon-button";
@@ -14,16 +13,9 @@ export const Upvotes = (props: UpvotesProps) => {
 
     return (
         <>
-            {/*<div className={`${styles.icons}`}>*/}
-                <IconButton pathD={ICON_UP} className={styles.iconsUp}/>
-                {/*<Button pathD={ICON_UP} />*/}
-            {/*</div>*/}
-            {/*<IconButton srcImage={} />*/}
+            <IconButton pathD={ICON_UP} className={styles.iconsUp}/>
             <p className={styles.upvotesP}>{formatNumber(upvotesNum, false)}</p>
-            {/*<div className={`${styles.icons}`}>*/}
-                <IconButton pathD={ICON_DOWN} className={styles.iconsDown}/>
-                {/*<Button pathD={ICON_DOWN}/>*/}
-            {/*</div>*/}
+            <IconButton pathD={ICON_DOWN} className={styles.iconsDown}/>
         </>
     )
 }

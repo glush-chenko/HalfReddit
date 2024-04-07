@@ -1,41 +1,37 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Subreddit} from "../subreddit/subreddit";
 import {ISubreddit} from "../../../../types/subreddit.interface";
 import styles from "./subreddits.module.css"
-
-const fakeDataSubreddits: ISubreddit[] = [
-    {
-        id: "34765762",
-        nameSub: "roviolirgs",
-        imgSub: "gfkjdfgkdfhg",
-        counterMembers: 343343223
-    },
-    {
-        id: "dhfdj367623",
-        nameSub: "cats original too mach",
-        imgSub: "gfh3435jh",
-        counterMembers: 1002324
-    },
-    {
-        id: "sfg672616",
-        nameSub: "roviolirgs",
-        imgSub: "ferjerjhd4",
-        counterMembers: 23438881
-    }
-]
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
+import {getSubreddits, selectSubreddits} from "../../../../utils/reddit-api";
+import {setActiveSubreddit} from "../../nav/nav-top-section/nav-top-section-slice";
 
 export const Subreddits = () => {
+    const dispatch = useAppDispatch();
+    const subreddits = useAppSelector(selectSubreddits);
+
+    useEffect(() => {
+        dispatch(getSubreddits());
+    }, [dispatch]);
+
+    const handleSubredditsClick = useCallback((prefixed: string)=> {
+        dispatch(setActiveSubreddit(prefixed));
+    }, [dispatch])
+    console.log(subreddits)
+
+
     return (
         <div className={styles.subredditsContainer}>
             <div className={styles.subreddit}>
                 <h2>Subreddits</h2>
                 <ul role="tablist">
-                    {fakeDataSubreddits.map((subreddit) => (
+                    {subreddits.map((subreddit: ISubreddit) => (
                         <li key={subreddit.id} role="tab">
                             <Subreddit
-                                counterMembers={subreddit.counterMembers}
+                                subscribers={subreddit.subscribers}
                                 imgSub={subreddit.imgSub}
-                                nameSub={subreddit.nameSub}
+                                prefixed={subreddit.prefixed}
+                                onClick={handleSubredditsClick}
                             />
                         </li>
                     ))}

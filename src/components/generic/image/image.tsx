@@ -14,16 +14,11 @@ export const Image = (props: ImageUtilsProps) => {
         setImageError(true);
     };
 
-    // const handleImageClick = () => {
-    //
-    // }
-
     return (
         <img
             src={imageError ? defaultImage : img}
             alt="default"
             onError={handleImageError}
-            // onClick={click && handleImageClick}
         />
     );
 }

@@ -1,7 +1,8 @@
 import React, {useMemo} from 'react';
 import {
+    ICON_ANIME,
     ICON_ART,
-    ICON_BUSINESS, ICON_CELEBRITY,
+    ICON_BUSINESS,
     ICON_CRYPTO,
     ICON_GAMING,
     ICON_SPORTS,
@@ -13,7 +14,7 @@ import {
     SCREEN_NAMES,
     selectActiveScreen,
     selectActiveTopic,
-    setActiveScreen, setActiveTopic,
+    setActiveTopic,
     TOPIC_NAMES
 } from "../nav-top-section/nav-top-section-slice";
 
@@ -56,10 +57,10 @@ const topicsArray: INavButton<TOPIC_NAMES>[] = [
         text: "Television"
     },
     {
-        name: TOPIC_NAMES.CELEBRITY,
-        icon: ICON_CELEBRITY,
+        name: TOPIC_NAMES.ANIME,
+        icon: ICON_ANIME,
         active: false,
-        text: "Celebrity"
+        text: "Anime"
     },
     {
         name: TOPIC_NAMES.ART,

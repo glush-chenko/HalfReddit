@@ -5,13 +5,16 @@ import {formatNumber} from "../../../utils/format-number-utils";
 import {ICON_COMMENTS} from "../../../assets/svg-pathes/common";
 
 interface CommentsCounterProps {
-    numComments: number
+    numComments: number,
+    onClick: () => void,
 }
 
-export const CommentsCounter = ({numComments}: CommentsCounterProps) => {
+export const CommentsCounter = (props: CommentsCounterProps) => {
+    const {numComments, onClick} = props;
+
     return (
-        <div className={styles.commentsContainer}>
-            <Button pathD={ICON_COMMENTS} />
+        <div className={styles.commentsContainer} onClick={onClick}>
+            <Button pathD={ICON_COMMENTS}/>
             <p>{formatNumber(numComments, false)}</p>
         </div>
     )

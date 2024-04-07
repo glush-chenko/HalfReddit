@@ -1,15 +1,14 @@
 import React from 'react';
-import {AllCards} from "./content/all-cards";
 import styles from "./main.module.css"
 import {Subreddits} from "./right-section/subreddits/subreddits";
 import {Nav} from "./nav/nav";
-
+import {Content} from "./content/content"
 export const Main = () => {
     return (
         <main>
             <Nav />
             <div className={styles.allContentContainer}>
-                <AllCards/>
+                <Content />
                 <Subreddits />
             </div>
         </main>
