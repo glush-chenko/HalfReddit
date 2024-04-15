@@ -1,0 +1,24 @@
+.leftSectionContainer {
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 4rem;
+    height: calc(100vh - 5rem);
+
+    min-width: 14rem;
+    min-height: 15rem;
+    border-right: 1px solid #80808057;
+    padding: 1rem 1.5rem 0 1rem;
+}
+
+.leftSectionContainer .border {
+    padding: 0;
+}
+
+.leftSectionContainerSmallScreen {
+    position: fixed;
+    background-color: #0f191c;
+    z-index: 100;
+    overflow: hidden;
+}

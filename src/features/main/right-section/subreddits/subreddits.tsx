@@ -1,46 +1,48 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Subreddit} from "../subreddit/subreddit";
 import {ISubreddit} from "../../../../types/subreddit.interface";
 import styles from "./subreddits.module.css"
-
-const fakeDataSubreddits: ISubreddit[] = [
-    {
-        id: "34765762",
-        nameSub: "roviolirgs",
-        imgSub: "gfkjdfgkdfhg",
-        counterMembers: 343343223
-    },
-    {
-        id: "dhfdj367623",
-        nameSub: "cats original too mach",
-        imgSub: "gfh3435jh",
-        counterMembers: 1002324
-    },
-    {
-        id: "sfg672616",
-        nameSub: "roviolirgs",
-        imgSub: "ferjerjhd4",
-        counterMembers: 23438881
-    }
-]
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
+import {loadSubredditsData, selectSubreddits} from "../../../../utils/reddit-api";
+import {setActiveSubreddit} from "../../nav/nav-top-section/nav-top-section-slice";
+import {selectScreenWidth} from "../../../../screen-slice";
 
 export const Subreddits = () => {
+    const dispatch = useAppDispatch();
+    const subreddits = useAppSelector(selectSubreddits);
+    const screenWidth = useAppSelector(selectScreenWidth);
+
+    useEffect(() => {
+        dispatch(loadSubredditsData());
+    }, [dispatch]);
+
+    const handleSubredditsClick = useCallback((prefixed: string)=> {
+        dispatch(setActiveSubreddit(prefixed));
+    }, [dispatch])
+
+
     return (
-        <div className={styles.subredditsContainer}>
-            <div className={styles.subreddit}>
-                <h2>Subreddits</h2>
-                <ul>
-                    {fakeDataSubreddits.map((subreddit) => (
-                        <li key={subreddit.id}>
-                            <Subreddit
-                                counterMembers={subreddit.counterMembers}
-                                imgSub={subreddit.imgSub}
-                                nameSub={subreddit.nameSub}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        <>
+            {screenWidth > 960 && (
+                <div className={styles.subredditsContainer}>
+                    <div className={styles.subreddit}>
+                        <h2>Subreddits</h2>
+                        <ul role="tablist">
+                            {subreddits.map((subreddit: ISubreddit) => (
+                                <li key={subreddit.id} role="tab">
+                                    <Subreddit
+                                        subscribers={subreddit.subscribers}
+                                        imgSub={subreddit.imgSub}
+                                        prefixed={subreddit.prefixed}
+                                        onClick={handleSubredditsClick}
+                                        item={subreddit}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )}
+        </>
     )
 }

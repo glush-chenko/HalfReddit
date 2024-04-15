@@ -1,6 +1,7 @@
-export interface ISubreddit{
+export interface ISubreddit {
     id?: string,
-    nameSub: string,
+    prefixed: string,
     imgSub: string,
-    counterMembers?: number
+    subscribers: number,
+    lastActivity?: number
 }

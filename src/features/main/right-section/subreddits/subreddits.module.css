@@ -1,13 +1,19 @@
 .subredditsContainer {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 
-    padding-top: 1rem;
+    min-width: 17rem;
+    max-width: 20rem;
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
 }
 
 .subreddit {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 
     background-color: #04090A;
     padding: 1rem;
@@ -17,14 +23,11 @@
 .subreddit h2 {
     color: rgb(255 255 255 / 49%);
     font-size: 1rem;
+    margin: 0;
 }
 
 .subreddit ul {
-    display: flex;
-    flex-direction: column;
-
     list-style-type: none;
     padding: 0;
     margin: 0;
-    gap: 1rem;
 }

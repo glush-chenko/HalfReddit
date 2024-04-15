@@ -1,3 +1,30 @@
+main {
+    display: flex;
+    padding-top: 4rem;
+}
+
 .allContentContainer {
     display: flex;
+    justify-content: center;
+    flex-grow: 1;
+
+    padding: 1rem;
+    gap: 2rem;
 }
+
+@media only screen and (max-width: 1200px) {
+    .allContentContainer {
+        padding: 1rem 2rem;
+    }
+}
+
+/*.allContentContainer::before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(0, 0, 0, 0.5); */
+/*    z-index: 100;*/
+/*}*/

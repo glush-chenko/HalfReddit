@@ -3,12 +3,13 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(47, 63, 97);
+    background-color: rgb(26, 40, 45);
     border-radius: 2rem;
     width: 4rem;
     height: 2rem;
     transition: background-color 0.3s;
     gap: 0.5rem;
+    cursor: pointer;
 }
 
 .commentsContainer p {
@@ -16,5 +17,10 @@
 }
 
 .commentsContainer:hover {
-    background-color: rgb(58 75 111);
+    background-color: rgb(34, 50, 55);
+}
+
+.commentsContainer:active {
+    transition: none;
+    background-color: rgb(42 65 72);
 }

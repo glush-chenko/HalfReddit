@@ -1,4 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.iconsUp:hover button, .iconsUp:focus-within button{
+    color: #3ae840;
+}
+
 .upvotesP {
+    margin: 0;
     color: white;
 }
+
+.iconsDown:hover button, .iconsDown:focus-within button {
+    color: red;
+}
+
 
