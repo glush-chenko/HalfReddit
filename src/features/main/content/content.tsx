@@ -2,12 +2,15 @@ import React, {Fragment, useEffect} from 'react';
 import {Card} from "../../../components/card/card";
 import styles from "./content.module.css";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {getHome, getPopular, getSubreddit, getTopic, selectRedditData} from "../../../utils/reddit-api";
+import {
+    loadCardsData,
+    selectRedditData
+} from "../../../utils/reddit-api";
 import {Divider} from "../../../components/generic/divider/divider";
 import {
     SCREEN_NAMES,
     selectActiveScreen, selectActiveSubreddit,
-    selectActiveTopic
+    selectActiveTopic, TOPIC_REDDITS
 } from "../nav/nav-top-section/nav-top-section-slice";
 
 export const Content = () => {
@@ -16,23 +19,22 @@ export const Content = () => {
     const activeTopic = useAppSelector(selectActiveTopic);
     const activeSubreddit = useAppSelector(selectActiveSubreddit);
     const redditData = useAppSelector(selectRedditData);
-    console.log(redditData)
 
     useEffect(() => {
         switch (activeScreen) {
             case SCREEN_NAMES.HOME:
-                dispatch(getHome());
+                dispatch(loadCardsData("r/home"));
                 break;
             case SCREEN_NAMES.POPULAR:
-                dispatch(getPopular());
+                dispatch(loadCardsData("r/popular"));
                 break;
             case SCREEN_NAMES.TOPIC:
                 if (activeTopic) {
-                    dispatch(getTopic(activeTopic));
+                    dispatch(loadCardsData(TOPIC_REDDITS[activeTopic]));
                 }
                 break;
             case SCREEN_NAMES.SUBREDDIT:
-                dispatch(getSubreddit(activeSubreddit));
+                dispatch(loadCardsData(activeSubreddit));
                 break;
         }
     }, [dispatch, activeScreen, activeTopic, activeSubreddit]);
@@ -53,7 +55,6 @@ export const Content = () => {
                         ups={card.ups}
                     />
                     <Divider />
-                    {/*<div className={styles.divider}/>*/}
                 </Fragment>
             ))}
         </div>

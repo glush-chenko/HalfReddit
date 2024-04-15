@@ -1,7 +1,6 @@
 .leftSectionContainer {
     display: flex;
     flex-direction: column;
-    /*flex-shrink: 0;*/
 
     position: sticky;
     top: 4rem;
@@ -17,8 +16,9 @@
     padding: 0;
 }
 
-/*.leftSection {*/
-/*    height: 100%;*/
-/*    width: 1px;*/
-/*    background-color: #80808057;*/
-/*}*/
+.leftSectionContainerSmallScreen {
+    position: fixed;
+    background-color: #0f191c;
+    z-index: 100;
+    overflow: hidden;
+}

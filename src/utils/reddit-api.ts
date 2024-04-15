@@ -2,15 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ICard} from "../types/card.interface";
 import {RootState} from "../app/store";
 import {ISubreddit} from "../types/subreddit.interface";
-import {TOPIC_NAMES, TOPIC_REDDITS} from "../features/main/nav/nav-top-section/nav-top-section-slice";
-
-enum REQUEST_DATA_TYPES {
-    CARDS = "CARDS",
-    SUBREDDITS = "SUBREDDITS"
-}
-
-const REQUESTS_PER_MINUTE = 10;
-export const REQUEST_INTERVAL = 60000 / REQUESTS_PER_MINUTE;
+import {IComment} from "../types/comment.interface";
 
 interface RedditState {
     subreddits: ISubreddit[],
@@ -18,7 +10,7 @@ interface RedditState {
     comments: {
         //key - post id
         //value - comments
-        [key: string]: [] //TODO create interface to comments
+        [key: string]: IComment[]
     };
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
@@ -32,57 +24,35 @@ const initialState: RedditState = {
     error: null,
 };
 
-export const fetchRedditData = createAsyncThunk(
-    'reddit/fetchData',
-    async ({
-               url,
-               postId,
-               dataType = REQUEST_DATA_TYPES.CARDS
-           }: {
-               url: string,
-               postId?: string,
-               dataType?: REQUEST_DATA_TYPES
-           }
+export const loadCardsData = createAsyncThunk(
+    "cardsData/loadCardsData",
+    async (prefixed: string) => {
+        const response = await fetch(`https://www.reddit.com/${prefixed}/search.json?q=type:image&restrict_sr=on&sort=hot`);
+        return await response.json();
+    }
+)
+
+export const loadSubredditsData = createAsyncThunk(
+    "subredditsData/loadSubredditsData",
+    async () => {
+        const response = await fetch(`https://www.reddit.com/subreddits.json?limit=5`);
+        return await response.json();
+    }
+)
+
+export const loadCommentsData = createAsyncThunk(
+    "commentsData/loadCommentsData",
+    async (
+        {permalink, id}: { permalink: string, id: string }
     ) => {
-        const response = await fetch(`https://www.reddit.com${url}`);
+        const response = await fetch(`https://www.reddit.com${permalink}.json?limit=16`);
         const data = await response.json();
         return {
             ...data,
-            dataType,
-        };
+            postId: id
+        }
     }
-);
-
-export const getPopular = () => {
-    return fetchRedditData({
-        url: "/r/popular/search.json?q=type:image&restrict_sr=on&sort=hot"
-    })
-}
-
-export const getHome = () => {
-    return fetchRedditData({
-        url: "/r/home/search.json?q=type:image&restrict_sr=on&sort=hot"
-    })
-}
-
-export const getSubreddits = () => {
-    return fetchRedditData({
-            url: "/subreddits.json?limit=5",
-            dataType: REQUEST_DATA_TYPES.SUBREDDITS,
-        })
-}
-
-export const getTopic = (topic: TOPIC_NAMES) => {
-    return fetchRedditData({
-        url: `/${TOPIC_REDDITS[topic]}/search.json?q=type:image&restrict_sr=on&sort=hot`
-    })
-}
-
-export const getSubreddit = (prefixed: string) => {
-    return fetchRedditData({
-        url: `/${prefixed}/search.json?q=type:image&restrict_sr=on&sort=hot`
-    })
-}
+)
 
 const redditSlice = createSlice({
     name: 'reddit',
@@ -90,43 +60,77 @@ const redditSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchRedditData.pending, (state) => {
+            .addCase(loadCardsData.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchRedditData.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(loadCardsData.fulfilled, (state, action:PayloadAction<any>) => {
                 state.status = 'succeeded';
-                if (action.payload.dataType === REQUEST_DATA_TYPES.CARDS) {
-                    state.data = action.payload.data.children.map((card: any): ICard => ({
-                        id: card.data.id,
-                        title: card.data.title,
-                        author: card.data.author,
-                        permalink: card.data.permalink,
-                        url: card.data.url,
-                        numComments: card.data.num_comments,
-                        createdDate: card.data.created * 1000,
-                        ups: Math.round(card.data.ups),
-                    }));
-                } else {
-                    state.subreddits = action.payload.data.children.map((subreddit: any): ISubreddit => ({
-                        id: subreddit.data.id,
-                        subscribers: subreddit.data.subscribers,
-                        prefixed: subreddit.data.display_name_prefixed,
-                        imgSub: subreddit.data.icon_img
-                    }));
-                }
+
+                state.data = action.payload.data.children.map((card: any): ICard => ({
+                    id: card.data.id,
+                    title: card.data.title,
+                    author: card.data.author,
+                    permalink: card.data.permalink,
+                    url: card.data.url,
+                    numComments: card.data.num_comments,
+                    createdDate: card.data.created * 1000,
+                    ups: Math.round(card.data.ups),
+                }));
             })
-            .addCase(fetchRedditData.rejected, (state, action) => {
+            .addCase(loadCardsData.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message ?? 'Unknown error';
-            });
+            })
+            .addCase(loadSubredditsData.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(loadSubredditsData.fulfilled, (state, action: PayloadAction<any>) => {
+                state.status = 'succeeded';
+
+                state.subreddits = action.payload.data.children.map((subreddit: any): ISubreddit => ({
+                    id: subreddit.data.id,
+                    subscribers: subreddit.data.subscribers,
+                    prefixed: subreddit.data.display_name_prefixed,
+                    imgSub: subreddit.data.icon_img
+                }));
+            })
+            .addCase(loadSubredditsData.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message ?? 'Unknown error';
+            })
+            .addCase(loadCommentsData.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(loadCommentsData.fulfilled, (state, action: PayloadAction<any>) => {
+                state.status = 'succeeded';
+
+                state.comments[action.payload.postId] = action.payload[1].data.children.reduce((acc: IComment[], comment: any) => {
+                    if (comment.kind !== "more" && comment.data.author !== "AutoModerator") {
+                        acc.push({
+                            id: comment.data.id,
+                            author: comment.data.author,
+                            text: comment.data.body_html,
+                            ups: comment.data.ups,
+                            createdDate: comment.data.created * 1000,
+                            replies: comment.data.replies,
+                        });
+                    }
+                    return acc;
+                }, []);
+            })
+            .addCase(loadCommentsData.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message ?? 'Unknown error';
+            })
     },
 });
 
-// export const {data, status, error} = useAppSelector((state) => state.reddit);
-
 export const selectRedditData = (state: RootState) => state.reddit.data;
 export const selectSubreddits = (state: RootState) => state.reddit.subreddits;
+export const selectComments = (state: RootState) => state.reddit.comments;
+export const selectCommentsById = (id: string) => (state: RootState) => {
+    return state.reddit.comments[id]
+}
 export const status = (state: RootState) => state.reddit.status;
 
-// export const  {data, status, error} = selectReddit = (state: RootState) => state.reddit;
 export default redditSlice.reducer;

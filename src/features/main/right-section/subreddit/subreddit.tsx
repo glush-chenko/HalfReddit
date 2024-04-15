@@ -4,17 +4,22 @@ import styles from "./subreddit.module.css"
 import defaultImageSub from "../../../../assets/subreddit-default.png"
 import {formatNumber} from "../../../../utils/format-number-utils";
 import {Image} from "../../../../components/generic/image/image";
+import {addRecent} from "../../nav/recent/recent-slice";
+import {useAppDispatch} from "../../../../app/hooks";
 
 interface ISubredditProps extends ISubreddit {
-    onClick: (prefixed: string) => void
+    onClick: (prefixed: string) => void,
+    item?: ISubreddit
 }
 
 export const Subreddit = (props: ISubredditProps) => {
-    const {imgSub, subscribers, id, prefixed, onClick} = props;
+    const {imgSub, subscribers, prefixed, onClick, item} = props;
+    const dispatch = useAppDispatch();
 
     const handleClick = useCallback(() => {
-        onClick(prefixed)
-    }, []);
+        onClick(prefixed);
+        dispatch(addRecent(item));
+    }, [dispatch]);
 
     return (
         <div className={styles.subredditContainer} tabIndex={0} onClick={handleClick}>

@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./button.module.css";
 import classNames from "classnames";
+import defaultImageSub from "../../../assets/subreddit-default.png";
+import {Image} from "../image/image";
 
 interface ButtonProps {
     text?: string;
@@ -13,6 +15,7 @@ interface ButtonProps {
 
 export const Button = (props: ButtonProps) => {
     const {pathD, onClick, disabled, text, srcImage, className} = props;
+
     return (
         <>
             <button
@@ -28,8 +31,10 @@ export const Button = (props: ButtonProps) => {
                     </svg>
                 )}
                 {srcImage && (
-                    <img alt="icon" src={srcImage}/>
+                    <Image img={srcImage} defaultImage={defaultImageSub}/>
+                    // <img alt="icon" src={srcImage} />
                 )}
+                {!srcImage && !pathD && (<Image img={defaultImageSub}/>)}
                 {text}
             </button>
         </>

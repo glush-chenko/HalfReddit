@@ -1,30 +1,41 @@
-import React from 'react';
-import {useAppDispatch} from "../../../../app/hooks";
-import {INavButton, NavSection} from "../nav-section/nav-section";
-import {SCREEN_NAMES} from "../nav-top-section/nav-top-section-slice";
-
-
-// name: string,
-//     path?: string,
-//     pathD?: boolean,
-//     pathTrue?: string,
-//     pathFalse?: string,
-//     onClickFunc?: (e: React.MouseEvent<HTMLElement>) => void,
-
-const RecentArray: INavButton<any>[] = [
-    {
-        name: SCREEN_NAMES.SUBREDDIT,
-        text: "r/example",
-        img: "https://b.thumbs.redditmedia.com/VZX_KQLnI1DPhlEZ07bIcLzwR1Win808RIt7zm49VIQ.png",
-    },
-]
-
-//{tabName} :{tabName: string}
+import React, {useMemo} from 'react';
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
+import {NavSection} from "../nav-section/nav-section";
+import {
+    SCREEN_NAMES,
+    selectActiveScreen, selectActiveSubreddit, setActiveScreen,
+    setActiveSubreddit
+} from "../nav-top-section/nav-top-section-slice";
+import {addRecent, selectRecent} from "./recent-slice";
+import {toggleNav} from "../../../../screen-slice";
 
 export const Recent = () => {
     const dispatch = useAppDispatch();
+    const activeScreen = useAppSelector(selectActiveScreen);
+    const activeSubreddit = useAppSelector(selectActiveSubreddit);
+    const recentArray = useAppSelector(selectRecent);
+
+
+    const navRecent = useMemo(() => {
+        return recentArray.map((nav: any) => {
+            return {
+                name: nav.prefixed,
+                text: nav.prefixed,
+                img: nav.imgSub,
+
+                active: activeScreen === SCREEN_NAMES.SUBREDDIT && activeSubreddit === nav.prefixed,
+                onClickFunc: () => {
+                    dispatch(addRecent(nav))
+                    dispatch(setActiveScreen(SCREEN_NAMES.SUBREDDIT));
+                    dispatch(setActiveSubreddit(nav.prefixed));
+
+                    dispatch(toggleNav());
+                },
+            }
+        })
+    }, [recentArray, activeScreen, activeSubreddit]);
 
     return (
-        <NavSection navArray={RecentArray} text="RECENT" />
+        <NavSection navArray={navRecent} text="RECENT"/>
     )
 }

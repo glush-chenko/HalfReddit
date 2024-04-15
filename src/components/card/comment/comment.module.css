@@ -1,0 +1,50 @@
+.commentContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.commentContent p {
+    color: white;
+    margin: 0;
+}
+
+.commentTop {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.commentTop img {
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.commentTop p {
+    font-size: 0.8rem;
+}
+
+.commentTop p:nth-of-type(1) {
+    font-weight: bold;
+}
+
+.commentTop p:nth-of-type(2) {
+    color: rgba(255, 255, 255, 0.61);
+}
+
+.commentText p {
+    padding-left: 2.96rem;
+}
+
+.commentUpvotes {
+    padding-left: 2.5rem;
+}
+
+.commentUpvotes p {
+    font-size: 0.8rem;
+}
+
+.commentUpvotes svg {
+    height: 1rem;
+    width: 1rem;
+}

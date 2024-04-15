@@ -17,13 +17,8 @@ import {
     setActiveTopic,
     TOPIC_NAMES
 } from "../nav-top-section/nav-top-section-slice";
+import {toggleNav} from "../../../../screen-slice";
 
-// name: string,
-//     path?: string,
-//     pathD?: boolean,
-//     pathTrue?: string,
-//     pathFalse?: string,
-//     onClickFunc?: (e: React.MouseEvent<HTMLElement>) => void,
 
 const topicsArray: INavButton<TOPIC_NAMES>[] = [
     {
@@ -82,27 +77,13 @@ export const Topics = () => {
                 active: activeScreen === SCREEN_NAMES.TOPIC && activeTopic === topic.name,
                 onClickFunc: () => {
                     dispatch(setActiveTopic(topic.name));
+                    dispatch(toggleNav());
                 }
             }
         })
     }, [dispatch, activeScreen, activeTopic]);
 
-    // for (const topicObj of TopicsArray) {
-    //     const topic: keyof typeof SCREEN_NAMES = topicObj.name as keyof typeof SCREEN_NAMES;
-    //
-    //     topicObj.active = activeScreen === SCREEN_NAMES[topic];
-    //     topicObj.onClickFunc = () => {
-    //         dispatch(setActiveScreen(SCREEN_NAMES[topic]));
-    //     }
-    // }
-
     return (
-        // <div className={styles.topicsContainer}>
-        //     <p>TOPICS</p>
-        //     {TopicsArray.map((topic) => (
-        //         <Button text={topic.name} pathD={topic.path}/>
-        //     ))}
-        // </div>
         <NavSection navArray={navTopics} text="TOPICS" />
     )
 }

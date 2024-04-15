@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from "classnames";
 import {Button} from "../../../../components/generic/button/button";
 import styles from "./nav-section.module.css"
-import {retry} from "@reduxjs/toolkit/query";
 import {SCREEN_NAMES, TOPIC_NAMES} from "../nav-top-section/nav-top-section-slice";
 
 export interface INavButton<T> {
@@ -15,7 +14,7 @@ export interface INavButton<T> {
     text?: string
 }
 interface NavSectionProps {
-    navArray: INavButton<SCREEN_NAMES | TOPIC_NAMES>[],
+    navArray: INavButton<SCREEN_NAMES | TOPIC_NAMES | string>[],
     text?: string,
 }
 
@@ -31,7 +30,9 @@ export const NavSection = (props: NavSectionProps) => {
                 return (
                     <div className={classNames(styles.iconsMain, {
                         [styles.active]: nav.active
-                    })} key={nav.name}>
+                    })} key={nav.name}
+                         // key={uniqueId}
+                    >
                         <Button
                             text={nav.text}
                             pathD={icon}

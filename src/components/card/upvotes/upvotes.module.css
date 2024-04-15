@@ -1,26 +1,8 @@
-/*.icons {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-
-/*    transition: background-color 0.3s;*/
-/*    border-radius: 1rem;*/
-/*}*/
-
-/*.icons:hover, .icons:focus-within {*/
-/*    background-color: rgb(34, 50, 55);*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.icons:active {*/
-/*    transition: none;*/
-/*    background-color: rgb(49 73 80);*/
-/*}*/
-
-/*.icons button {*/
-/*    border-radius: 1rem;*/
-/*    padding: 0.5rem;*/
-/*    transition: background-color 0.3s;*/
-/*}*/
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
 
 .iconsUp:hover button, .iconsUp:focus-within button{
     color: #3ae840;
@@ -28,7 +10,6 @@
 
 .upvotesP {
     margin: 0;
-    padding: 0.3rem 0;
     color: white;
 }
 

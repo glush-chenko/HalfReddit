@@ -8,6 +8,7 @@ import {
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {SCREEN_NAMES, selectActiveScreen, setActiveScreen} from "./nav-top-section-slice";
 import {INavButton, NavSection} from "../nav-section/nav-section";
+import {toggleNav} from "../../../../screen-slice";
 
 const topArray: INavButton<SCREEN_NAMES>[] = [
     {
@@ -37,6 +38,7 @@ export const NavTopSection = () => {
                 active: activeScreen === navButton.name,
                 onClickFunc: () => {
                     dispatch(setActiveScreen(navButton.name));
+                    dispatch(toggleNav());
                 }
             }
         })

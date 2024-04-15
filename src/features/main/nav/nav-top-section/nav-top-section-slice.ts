@@ -4,7 +4,7 @@ export enum SCREEN_NAMES {
     HOME = "HOME",
     POPULAR = "POPULAR",
     SUBREDDIT = "SUBREDDIT",
-    TOPIC = "TOPIC",
+    TOPIC = "TOPIC"
 }
 
 export enum TOPIC_NAMES {
@@ -30,13 +30,13 @@ export const TOPIC_REDDITS = {
 interface IInitialState {
     currentScreenName: SCREEN_NAMES,
     activeSubreddit: string,
-    activeTopic: TOPIC_NAMES | null
+    activeTopic: TOPIC_NAMES | null,
 }
 
 const initialState: IInitialState = {
     currentScreenName: SCREEN_NAMES.POPULAR,
     activeSubreddit: "",
-    activeTopic: null
+    activeTopic: null,
 }
 
 export const ActiveScreenSlice = createSlice({
@@ -53,11 +53,15 @@ export const ActiveScreenSlice = createSlice({
         setActiveSubreddit: (state, action) => {
             state.activeSubreddit = action.payload;
             state.currentScreenName = SCREEN_NAMES.SUBREDDIT;
-        }
+        },
     },
 });
 
-export const {setActiveScreen, setActiveTopic, setActiveSubreddit} = ActiveScreenSlice.actions;
+export const {
+    setActiveScreen,
+    setActiveTopic,
+    setActiveSubreddit,
+} = ActiveScreenSlice.actions;
 
 export const selectActiveScreen = (state: RootState) => state.activeScreen.currentScreenName;
 export const selectActiveTopic = (state: RootState) => state.activeScreen.activeTopic;
