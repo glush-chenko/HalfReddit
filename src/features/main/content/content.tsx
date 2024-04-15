@@ -6,7 +6,6 @@ import {
     loadCardsData,
     selectRedditData
 } from "../../../utils/reddit-api";
-import {Divider} from "../../../components/generic/divider/divider";
 import {
     SCREEN_NAMES,
     selectActiveScreen, selectActiveSubreddit,
@@ -54,7 +53,6 @@ export const Content = () => {
                         numComments={card.numComments}
                         ups={card.ups}
                     />
-                    <Divider />
                 </Fragment>
             ))}
         </div>

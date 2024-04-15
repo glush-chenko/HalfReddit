@@ -9,6 +9,7 @@ import {ImageWithBlurredBackground} from "../generic/image-background/image-back
 import {Comments} from "../../features/comments/comments";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {loadCommentsData, selectCommentsById} from "../../utils/reddit-api";
+import { Divider } from '../generic/divider/divider';
 
 interface CardProps {
     authorImg?: string,
@@ -33,7 +34,7 @@ export const Card = (props: CardProps) => {
 
     const handleDivClick = useCallback(() => {
         dispatch(loadCommentsData({permalink: permalinkComments, id: id}));
-    }, [dispatch]);
+    }, [dispatch, id, permalinkComments]);
 
     const handleOnError = () => {
         setImageError(true);
@@ -41,22 +42,25 @@ export const Card = (props: CardProps) => {
 
     return (
         <div className={styles.cardContainer} key={id}>
-            <div className={styles.cardUpvotes}>
-                <Upvotes upvotesNum={ups}/>
-            </div>
-            <div className={styles.cardInfo}>
-                <div className={styles.dataCard}>
-                    <h3>{title}</h3>
-                    {!imageError && <ImageWithBlurredBackground alt="image" src={urlImg} onError={handleOnError}/>}
+            <div className={styles.cardInnerContainer}>
+                <div className={styles.cardUpvotes}>
+                    <Upvotes upvotesNum={ups}/>
                 </div>
-                <div className={styles.cardFooter}>
-                    {authorImg && <Image img={authorImg} defaultImage={defaultImage}/>}
-                    <p>{author}</p>
-                    <p>{getTimeDifference(new Date(createdDate))}</p>
-                    <CommentsCounter numComments={numComments} onClick={handleDivClick}/>
+                <div className={styles.cardInfo}>
+                    <div className={styles.dataCard}>
+                        <h3>{title}</h3>
+                        {!imageError && <ImageWithBlurredBackground alt="image" src={urlImg} onError={handleOnError}/>}
+                    </div>
+                    <div className={styles.cardFooter}>
+                        {authorImg && <Image img={authorImg} defaultImage={defaultImage}/>}
+                        <p>{author}</p>
+                        <p>{getTimeDifference(new Date(createdDate))}</p>
+                        <CommentsCounter numComments={numComments} onClick={handleDivClick}/>
+                    </div>
+                    {comments && comments.length && <Comments comments={comments}/>}
                 </div>
-                {comments && comments.length && <Comments comments={comments}/>}
             </div>
+            <Divider />
         </div>
     );
 }

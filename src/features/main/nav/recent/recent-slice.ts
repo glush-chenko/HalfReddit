@@ -32,16 +32,17 @@ const recent = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(REHYDRATE, (state, action: AnyAction) => {
-            console.log(action.payload.recentSlice.recent)
-            state.recent = action.payload.recentSlice.recent.filter((item: ISubreddit) => {
-                const now = Date.now();
+            if (action.payload) {
+                state.recent = action.payload.recentSlice.recent.filter((item: ISubreddit) => {
+                    const now = Date.now();
 
-                if (item.lastActivity) {
-                    const diff =  now - item.lastActivity;
-                    return diff < MINUTES_30;
-                }
-                return item;
-            })
+                    if (item.lastActivity) {
+                        const diff =  now - item.lastActivity;
+                        return diff < MINUTES_30;
+                    }
+                    return item;
+                })
+            }
         });
     },
 })
