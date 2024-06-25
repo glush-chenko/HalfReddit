@@ -19,6 +19,6 @@
 .leftSectionContainerSmallScreen {
     position: fixed;
     background-color: #0f191c;
-    z-index: 100;
+    z-index: 1000;
     overflow: hidden;
 }

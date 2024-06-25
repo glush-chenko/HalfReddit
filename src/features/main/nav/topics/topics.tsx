@@ -17,7 +17,7 @@ import {
     setActiveTopic,
     TOPIC_NAMES
 } from "../nav-top-section/nav-top-section-slice";
-import {toggleNav} from "../../../../screen-slice";
+import {selectScreenSizes, toggleNav} from "../../../../screen-slice";
 
 
 const topicsArray: INavButton<TOPIC_NAMES>[] = [
@@ -69,6 +69,7 @@ export const Topics = () => {
     const dispatch = useAppDispatch();
     const activeScreen = useAppSelector(selectActiveScreen);
     const activeTopic = useAppSelector(selectActiveTopic);
+    const screenSizes = useAppSelector(selectScreenSizes);
 
     const navTopics = useMemo(() => {
         return topicsArray.map((topic) => {
@@ -77,11 +78,13 @@ export const Topics = () => {
                 active: activeScreen === SCREEN_NAMES.TOPIC && activeTopic === topic.name,
                 onClickFunc: () => {
                     dispatch(setActiveTopic(topic.name));
-                    dispatch(toggleNav());
+                    if (!screenSizes.isExtraLarge) {
+                        dispatch(toggleNav());
+                    }
                 }
             }
         })
-    }, [dispatch, activeScreen, activeTopic]);
+    }, [dispatch, activeScreen, activeTopic, screenSizes.isExtraLarge]);
 
     return (
         <NavSection navArray={navTopics} text="TOPICS" />

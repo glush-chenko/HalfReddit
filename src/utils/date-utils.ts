@@ -14,7 +14,9 @@ export const getTimeDifference = (targetDate: Date) => {
         return `${hoursPassed} hr. ago`
     } else if (daysPassed < 30) {
         return `${daysPassed} day ago`
-    } else {
+    } else if (monthsPassed < 12){
         return `${monthsPassed} mo ago`
+    } else {
+        return `${Math.floor(monthsPassed / 12)} years ago`
     }
 }

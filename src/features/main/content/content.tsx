@@ -11,6 +11,7 @@ import {
     selectActiveScreen, selectActiveSubreddit,
     selectActiveTopic, TOPIC_REDDITS
 } from "../nav/nav-top-section/nav-top-section-slice";
+import {Loading} from "../../../components/generic/loading/loading";
 
 export const Content = () => {
     const dispatch = useAppDispatch();
@@ -22,39 +23,43 @@ export const Content = () => {
     useEffect(() => {
         switch (activeScreen) {
             case SCREEN_NAMES.HOME:
-                dispatch(loadCardsData("r/home"));
+                dispatch(loadCardsData({prefixed: "r/home", search: ""}));
                 break;
             case SCREEN_NAMES.POPULAR:
-                dispatch(loadCardsData("r/popular"));
+                dispatch(loadCardsData({prefixed: "r/popular", search: ""}));
                 break;
             case SCREEN_NAMES.TOPIC:
                 if (activeTopic) {
-                    dispatch(loadCardsData(TOPIC_REDDITS[activeTopic]));
+                    dispatch(loadCardsData({prefixed: TOPIC_REDDITS[activeTopic], search: ""}));
                 }
                 break;
             case SCREEN_NAMES.SUBREDDIT:
-                dispatch(loadCardsData(activeSubreddit));
+                dispatch(loadCardsData({prefixed: activeSubreddit, search: ""}));
                 break;
         }
     }, [dispatch, activeScreen, activeTopic, activeSubreddit]);
 
     return (
         <div className={styles.allCards}>
-            {redditData.map((card) => (
-                <Fragment key={card.id}>
-                    <Card
-                        id={card.id}
-                        author={card.author}
-                        title={card.title}
-                        createdDate={card.createdDate}
-                        urlImg={card.url}
-                        authorImg={card.authorImgUrl}
-                        permalinkComments={card.permalink}
-                        numComments={card.numComments}
-                        ups={card.ups}
-                    />
-                </Fragment>
-            ))}
+            {!redditData.length ? <Loading /> : (
+                <>
+                    {redditData.map((card) => (
+                        <Fragment key={card.id}>
+                            <Card
+                                id={card.id}
+                                author={card.author}
+                                title={card.title}
+                                createdDate={card.createdDate}
+                                urlImg={card.url}
+                                authorImg={card.authorImgUrl}
+                                permalinkComments={card.permalink}
+                                numComments={card.numComments}
+                                ups={card.ups}
+                            />
+                        </Fragment>
+                    ))}
+                </>
+            )}
         </div>
     )
 }

@@ -26,8 +26,10 @@ const initialState: RedditState = {
 
 export const loadCardsData = createAsyncThunk(
     "cardsData/loadCardsData",
-    async (prefixed: string) => {
-        const response = await fetch(`https://www.reddit.com/${prefixed}/search.json?q=type:image&restrict_sr=on&sort=hot`);
+    async (
+        {prefixed, search = ""}: {prefixed: string, search?: string}
+    ) => {
+        const response = await fetch(`https://www.reddit.com/${prefixed}/search.json?q=${search}type:image&restrict_sr=on&sort=hot`);
         return await response.json();
     }
 )
@@ -62,6 +64,7 @@ const redditSlice = createSlice({
         builder
             .addCase(loadCardsData.pending, (state) => {
                 state.status = 'loading';
+                state.data = [];
             })
             .addCase(loadCardsData.fulfilled, (state, action:PayloadAction<any>) => {
                 state.status = 'succeeded';
@@ -127,10 +130,8 @@ const redditSlice = createSlice({
 
 export const selectRedditData = (state: RootState) => state.reddit.data;
 export const selectSubreddits = (state: RootState) => state.reddit.subreddits;
-export const selectComments = (state: RootState) => state.reddit.comments;
 export const selectCommentsById = (id: string) => (state: RootState) => {
-    return state.reddit.comments[id]
+    return state.reddit.comments[id];
 }
-export const status = (state: RootState) => state.reddit.status;
-
+export const selectStatus = (state: RootState) => state.reddit.status;
 export default redditSlice.reducer;

@@ -1,0 +1,21 @@
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.skeleton {
+    width: 100%;
+    padding-top: calc(100% / 2);
+    background-color: rgba(255, 255, 255, 0.05);
+    animation: blink 1.5s infinite;
+}
+
+.skeletonSubreddit {
+    padding: 0;
+    height: 2rem;
+    width: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    animation: blink 1.5s infinite;
+    border-radius: 50%;
+}

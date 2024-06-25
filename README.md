@@ -1,46 +1,39 @@
+# HalfReddit
+
+HalfReddit is a Reddit-like application that allows users to browse, post, and interact with content from the popular social news aggregation website, Reddit. This project was created using the Reddit API and aims to provide a simplified and user-friendly experience for Reddit users.
+
+## Features
+
+- **Browse Content**: Users can browse the most popular, trending, or newest submissions from various subreddits.
+
+- **View Comments**: Users can view and interact with the comments on a particular submission.
+
+- **Upvote/Downvote**: Users can upvote or downvote submissions and comments to help curate the content.
+
+## Technologies Used
+
+- **React.ts**: The frontend of the application is built using the React.ts library, providing a component-based architecture.
+- **Redux**: The state management of the application is handled using the Redux library, ensuring a predictable and scalable state management.
+- **Reddit API**: The application integrates with the Reddit API to fetch and interact with the platform's content.
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+To get started with HalfReddit, follow these steps:
 
-## Available Scripts
+1. Clone the repository: `git clone https://github.com/your-username/HalfReddit.git`
+2. Install dependencies: `npm install`
+3. Configure the Reddit API credentials: Create a `.env`  file in the project root directory and add the following environment variable
+4. Start the development server: `npm start`
+5. Open your web browser and navigate to: `http://localhost:3000` to access the HalfReddit application.
 
-In the project directory, you can run:
+## Contributing
 
-### `npm start`
+We welcome contributions to Zest! If you would like to contribute, please follow these guidelines:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Submit a pull request, explaining the changes you've made.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

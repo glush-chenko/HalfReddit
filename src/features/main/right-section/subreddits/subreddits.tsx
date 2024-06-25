@@ -5,12 +5,12 @@ import styles from "./subreddits.module.css"
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {loadSubredditsData, selectSubreddits} from "../../../../utils/reddit-api";
 import {setActiveSubreddit} from "../../nav/nav-top-section/nav-top-section-slice";
-import {selectScreenWidth} from "../../../../screen-slice";
+import {selectScreenSizes} from "../../../../screen-slice";
 
 export const Subreddits = () => {
     const dispatch = useAppDispatch();
     const subreddits = useAppSelector(selectSubreddits);
-    const screenWidth = useAppSelector(selectScreenWidth);
+    const screenSizes = useAppSelector(selectScreenSizes);
 
     useEffect(() => {
         dispatch(loadSubredditsData());
@@ -23,7 +23,7 @@ export const Subreddits = () => {
 
     return (
         <>
-            {screenWidth > 960 && (
+            {!screenSizes.isMedium && (
                 <div className={styles.subredditsContainer}>
                     <div className={styles.subreddit}>
                         <h2>Subreddits</h2>

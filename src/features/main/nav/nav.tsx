@@ -4,20 +4,20 @@ import styles from "./nav.module.css";
 import {Recent} from "./recent/recent";
 import {Topics} from "./topics/topics";
 import {useAppSelector} from "../../../app/hooks";
-import {selectShowNav, selectScreenWidth} from "../../../screen-slice";
+import {selectShowNav, selectScreenSizes} from "../../../screen-slice";
 import classNames from "classnames";
 
 export const Nav = () => {
-    const screenWidth = useAppSelector(selectScreenWidth);
     const showNav = useAppSelector(selectShowNav);
+    const screenSizes = useAppSelector(selectScreenSizes);
 
     return (
         <>
-            {(screenWidth > 1200 || showNav) &&
+            {showNav &&
                 (
                     <div
                         className={classNames(styles.leftSectionContainer, {
-                            [styles.leftSectionContainerSmallScreen]: showNav
+                            [styles.leftSectionContainerSmallScreen]: showNav && !screenSizes.isExtraLarge
                         })}
                     >
                         <NavTopSection/>

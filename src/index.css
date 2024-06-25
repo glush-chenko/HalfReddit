@@ -1,10 +1,9 @@
-/*#root {*/
-/*  display: grid;*/
-/*  grid-template-columns: 1fr 2fr 1fr;*/
-/*  grid-gap: 16px;*/
-/*}*/
 *:focus-visible {
   outline: 1px solid white;
+}
+
+html, body, #root {
+  height: 100%;
 }
 
 body {
@@ -14,8 +13,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*background-color: #1f293f;*/
   background-color: #0f191c;
+}
+
+#root {
+  display: flex;
 }
 
 code {

@@ -29,12 +29,14 @@ export const Card = (props: CardProps) => {
         createdDate, authorImg, ups, numComments, permalinkComments
     } = props;
     const [imageError, setImageError] = useState(false);
+    const [showComments, setShowComments] = useState(false);
     const dispatch = useAppDispatch();
     const comments = useAppSelector(selectCommentsById(id));
 
     const handleDivClick = useCallback(() => {
         dispatch(loadCommentsData({permalink: permalinkComments, id: id}));
-    }, [dispatch, id, permalinkComments]);
+        setShowComments(!showComments);
+    }, [dispatch, id, permalinkComments, showComments]);
 
     const handleOnError = () => {
         setImageError(true);
@@ -57,7 +59,7 @@ export const Card = (props: CardProps) => {
                         <p>{getTimeDifference(new Date(createdDate))}</p>
                         <CommentsCounter numComments={numComments} onClick={handleDivClick}/>
                     </div>
-                    {comments && comments.length && <Comments comments={comments}/>}
+                    {(comments && showComments) && comments.length && <Comments comments={comments}/>}
                 </div>
             </div>
             <Divider />
