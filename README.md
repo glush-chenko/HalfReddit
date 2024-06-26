@@ -28,7 +28,7 @@ To get started with HalfReddit, follow these steps:
 
 ## Contributing
 
-We welcome contributions to Zest! If you would like to contribute, please follow these guidelines:
+We welcome contributions to HalfReddit! If you would like to contribute, please follow these guidelines:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
