@@ -20,7 +20,7 @@ HalfReddit is a Reddit-like application that allows users to browse, post, and i
 
 To get started with HalfReddit, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/HalfReddit.git`
+1. Clone the repository: `git clone git@github.com:glush-chenko/HalfReddit.git`
 2. Install dependencies: `npm install`
 3. Configure the Reddit API credentials: Create a `.env`  file in the project root directory and add the following environment variable
 4. Start the development server: `npm start`
